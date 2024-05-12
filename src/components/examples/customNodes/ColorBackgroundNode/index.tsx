@@ -21,10 +21,23 @@ const nodeTypes = {
 };
 const defaultViewPort = { x: 0, y: 0, zoom: 1 };
 
+const hide = (hidden) => (nodeOrEdge) => {
+  nodeOrEdge.hidden = hidden;
+  return nodeOrEdge;
+};
+
 const CustomNodeFlow = () => {
   const [nodes, setNodes, onNodesChange] = useNodesState([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
   const [bgColor, setBgColor] = useState(initialColor);
+
+  // hide you nodes
+  const [hidden, setHidden] = useState(false);
+
+  useEffect(() => {
+    setNodes((nds) => nds.map(hide(hidden)));
+    setEdges((eds) => eds.map(hide(hidden)));
+  }, [hidden]);
 
   useEffect(() => {
     const onChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -81,7 +94,7 @@ const CustomNodeFlow = () => {
         defaultViewport={defaultViewPort}
         fitView
       >
-        <Buttons/>
+        <Buttons hidden={hidden} setHidden={setHidden} />
         <Controls />
         <MiniMap />
       </ReactFlow>

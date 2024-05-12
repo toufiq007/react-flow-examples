@@ -1,6 +1,6 @@
 import { useStoreApi, useReactFlow, Panel } from "reactflow";
 
-const Buttons = () => {
+const Buttons = ({hidden,setHidden}) => {
   const store = useStoreApi();
   const { zoomIn, zoomOut, setCenter } = useReactFlow();
   const handleFocus = () => {
@@ -22,6 +22,18 @@ const Buttons = () => {
       <button onClick={zoomIn}>zoom in</button>
       <button onClick={handleFocus}>zoom focus</button>
       <button onClick={zoomOut}>zoom out</button>
+      <div>
+          <label htmlFor="ishidden">
+            isHidden
+            <input
+              id="ishidden"
+              type="checkbox"
+              checked={hidden}
+              onChange={(event) => setHidden(event.target.checked)}
+              className="react-flow__ishidden"
+            />
+          </label>
+        </div>
     </div>
     </Panel>
   );
