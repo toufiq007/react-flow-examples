@@ -9,6 +9,7 @@ import ReactFlow, {
 import "reactflow/dist/style.css";
 
 import CustomSelectorNode from "./ColorSelectorNodes";
+import Buttons from "./Buttons";
 import { ChangeEvent, useCallback, useEffect, useState } from "react";
 import { initialEdges } from "./InitialEdges";
 import { initialNodes } from "./InitialNodes";
@@ -18,7 +19,7 @@ const initialColor = "#000";
 const nodeTypes = {
   colorNodes: CustomSelectorNode,
 };
-const defaultViewPort = { x: 0, y: 0, zoom: 2 };
+const defaultViewPort = { x: 0, y: 0, zoom: 1 };
 
 const CustomNodeFlow = () => {
   const [nodes, setNodes, onNodesChange] = useNodesState([]);
@@ -80,6 +81,7 @@ const CustomNodeFlow = () => {
         defaultViewport={defaultViewPort}
         fitView
       >
+        <Buttons/>
         <Controls />
         <MiniMap />
       </ReactFlow>
