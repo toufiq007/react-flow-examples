@@ -1,4 +1,4 @@
-import { Handle, NodeProps, Position } from "reactflow";
+import { Handle, NodeProps, Position, useReactFlow } from "reactflow";
 
 const PAYMENT_PROVIDER_IMAGE_MAP: { [code: string]: string } = {
   St: "https://cdn.worldvectorlogo.com/logos/stripe-2.svg",
@@ -9,8 +9,10 @@ const PAYMENT_PROVIDER_IMAGE_MAP: { [code: string]: string } = {
 };
 
 const PaymentProvider = ({
-  data: { paymentProvier, code },
-}: NodeProps<{ paymentProvier: string; code: string }>) => {
+  data: { name, code },
+  id,
+}: NodeProps<{ name: string; code: string }>) => {
+  const { setNodes } = useReactFlow();
   return (
     <div style={{ width: "200px" }}>
       <div
@@ -32,8 +34,15 @@ const PaymentProvider = ({
             src={PAYMENT_PROVIDER_IMAGE_MAP[code]}
           />
         </div>
-        <p>{paymentProvier}</p>
-        <button style={{color:"red"}}>X</button>
+        <p>{name}</p>
+        <button
+          onClick={() =>
+            setNodes((nodes) => nodes.filter((node) => node.id !== id))
+          }
+          style={{ color: "red", cursor: "pointer" }}
+        >
+          X
+        </button>
       </div>
       <Handle type="target" position={Position.Left} />
       <Handle type="source" position={Position.Right} />

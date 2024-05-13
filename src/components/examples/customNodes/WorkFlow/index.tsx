@@ -2,6 +2,7 @@ import { useCallback } from "react";
 import ReactFlow, {
   Background,
   Connection,
+  Controls,
   Edge,
   Node,
   addEdge,
@@ -13,6 +14,7 @@ import PaymentInit from "./nodes/PaymentInit";
 import { initialEdges, initialNodes } from "./workFlowConstants";
 import PaymentCountry from "./nodes/PaymentCountry";
 import PaymentProvider from "./nodes/PaymentProvider";
+import PaymentProviderNodes from "./nodes/PaymentProviderNodes";
 
 // const initialNodes: Node[] = [
 //   {
@@ -46,6 +48,7 @@ const nodeTypes = {
   paymentInit: PaymentInit,
   paymentCountry: PaymentCountry,
   paymentProvider: PaymentProvider,
+  paymentProviderSelect: PaymentProviderNodes,
 };
 
 const WorkFlow = () => {
@@ -69,6 +72,7 @@ const WorkFlow = () => {
         fitView
       >
         <Background />
+        <Controls />
       </ReactFlow>
     </div>
   );

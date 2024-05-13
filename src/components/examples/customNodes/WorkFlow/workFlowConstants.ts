@@ -21,21 +21,27 @@ export const initialNodes: Node[] = [
   },
   {
     id: "4",
-    data: { paymentProvier: "Google Pay", code: "Gp" },
+    data: { name: "Google Pay", code: "Gp" },
     position: { x: 800, y: 0 },
     type: "paymentProvider",
   },
   {
     id: "5",
-    data: { paymentProvier: "Stripe", code: "St" },
+    data: { name: "Stripe", code: "St" },
     position: { x: 800, y: 200 },
     type: "paymentProvider",
   },
   {
     id: "6",
-    data: { paymentProvier: "Apple Pay", code: "Ap" },
+    data: { name: "Apple Pay", code: "Ap" },
     position: { x: 800, y: 400 },
     type: "paymentProvider",
+  },
+  {
+    id: "6",
+    data: {},
+    position: { x: 400, y: -200 },
+    type: "paymentProviderSelect",
   },
 ];
 
