@@ -15,6 +15,7 @@ import { initialEdges, initialNodes } from "./workFlowConstants";
 import PaymentCountry from "./nodes/PaymentCountry";
 import PaymentProvider from "./nodes/PaymentProvider";
 import PaymentProviderNodes from "./nodes/PaymentProviderNodes";
+import CustomEdges from "./edges/CustomEdges";
 
 // const initialNodes: Node[] = [
 //   {
@@ -50,18 +51,25 @@ const nodeTypes = {
   paymentProvider: PaymentProvider,
   paymentProviderSelect: PaymentProviderNodes,
 };
-
+const edgeTypes = {
+  CustomEdgeType: CustomEdges,
+};
 const WorkFlow = () => {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
   const onConnect = useCallback((connection: Connection) => {
-    const edge = { ...connection, animated: true, id: `${edges.length + 1}` };
+    const edge = {
+      ...connection,
+      animated: true,
+      id: `${edges.length + 1}`,
+      type: "CustomEdgeType",
+    };
     setEdges((prevState) => addEdge(edge, prevState));
   }, []);
 
   return (
-    <div style={{ height: "100vh", width: "50%", border: "2px solid #000" }}>
+    <div style={{ height: "100vh", width: "100%", border: "2px solid #000" }}>
       <ReactFlow
         nodes={nodes}
         edges={edges}
@@ -69,6 +77,7 @@ const WorkFlow = () => {
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
         nodeTypes={nodeTypes}
+        edgeTypes={edgeTypes}
         fitView
       >
         <Background />
